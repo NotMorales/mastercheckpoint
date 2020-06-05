@@ -1,0 +1,16 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class persona extends Model
+{
+    protected $table = 'persona';
+    protected $primaryKey = 'personaId';
+
+    //Relacion uno a muchos
+    public function users(){
+        return $this->hasMany('App\users','personaId','personaId');
+    }
+}
