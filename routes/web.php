@@ -71,6 +71,10 @@ Route::post('/ExperienciaEducativa/participaciones/estudiante/editar/guardar/det
 //Notificaciones
 Route::get('/notificaciones/{notificacion}', 'notificacionController@notificaciones')->name('notificaciones');
 
+//Mensajes
+Route::get('/mensajes/{mensaje}', 'mensajeController@mensajes')->name('mensajes');
+Route::post('/mensajes/enviar/nuevo', 'mensajeController@enviarMensaje')->name('enviarMensaje');
+
 //ESTUDIANTE
 Route::get('/ExperienciaEducativa/Est/{experiencia}', 'experienciaeducativaController@verExperienciaEst')->name('verExperienciaEst');
 Route::get('/ExperienciaEducativa/Est/salon/{experiencia}', 'experienciaeducativaController@salonEst')->name('salonEst');

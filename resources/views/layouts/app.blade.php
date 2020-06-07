@@ -15,7 +15,7 @@
 
 		<!--end::Fonts -->
 
-		<link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
 
 		<!--end::Layout Skins -->
 		<script src="{{ asset('js/app.js') }}"></script>
