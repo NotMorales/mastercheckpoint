@@ -73,7 +73,9 @@ Route::get('/notificaciones/{notificacion}', 'notificacionController@notificacio
 
 //Mensajes
 Route::get('/mensajes/{mensaje}', 'mensajeController@mensajes')->name('mensajes');
+Route::get('/mensaje/nuevo', 'mensajeController@nuevoMensaje')->name('nuevoMensaje');
 Route::post('/mensajes/enviar/nuevo', 'mensajeController@enviarMensaje')->name('enviarMensaje');
+Route::post('/mensaje/enviar/nuevo', 'mensajeController@enviarNuevoMensaje')->name('enviarNuevoMensaje');
 
 //ESTUDIANTE
 Route::get('/ExperienciaEducativa/Est/{experiencia}', 'experienciaeducativaController@verExperienciaEst')->name('verExperienciaEst');

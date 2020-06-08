@@ -24,7 +24,7 @@
                         <div class="kt-searchbar">
                             <div class="input-group">
                                 {{-- btn-block para hacerlo grande --}}
-                                <a href="#" class="btn btn-success">
+                                <a href="{{route('nuevoMensaje')}}" class="btn btn-success">
                                     <i class="flaticon2-plus"></i> Nuevo mensaje
                                 </a>
                             </div>
@@ -196,11 +196,11 @@
                                     <div class="kt-chat__input">
                                         <div class="form-group">
                                             <label name="Asunto">Asunto:</label>
-                                            <input name="Asunto" value="" type="text" class="form-control" >
+                                            <input name="Asunto" value="{{ old('Asunto') }}" type="text" class="form-control @error('Asunto') is-invalid @enderror" >
                                         </div>
                                         <div class="form-group mb-1">
                                             <label name="Mensaje" for="exampleTextarea">Mensaje:</label>
-                                            <textarea name="Mensaje" class="form-control" id="exampleTextarea" rows="3"></textarea>
+                                            <textarea name="Mensaje" class="form-control @error('Mensaje') is-invalid @enderror" id="exampleTextarea" rows="3">{{ old('Mensaje') }}</textarea>
                                         </div>
                                         <div class="kt-chat__toolbar">
 
