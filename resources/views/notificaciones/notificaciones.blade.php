@@ -24,24 +24,27 @@
                         <div class="kt-widget kt-widget--users kt-mt-20">
                             <div class="kt-scroll kt-scroll--pull">
                                 <div class="kt-widget__items">
-                                    <div class="kt-widget__item">
-                                        <span class="kt-media kt-media--circle">
-                                            <img src="assets/media/users/300_9.jpg" alt="image">
-                                        </span>
-                                        <div class="kt-widget__info">
-                                            <div class="kt-widget__section">
-                                                <a href="#" class="kt-widget__username">Matt Pears</a>
-                                                <span class="kt-badge kt-badge--success kt-badge--dot"></span>
-                                            </div>
-                                            <span class="kt-widget__desc">
-                                                Head of Development
+                                    @foreach ($notificaciones as $notificacion)
+                                        <div class="kt-widget__item">
+                                            <span class="kt-media kt-media--circle">
+                                                <img src="{{asset('assets/media/users/default.jpg')}}" alt="image">
                                             </span>
+                                            <div class="kt-widget__info">
+                                                <div class="kt-widget__section">
+                                                    <a href="{{route('notificaciones', ['notificacion' => $notificacion->notificacionId])}}" class="kt-widget__username">{{$notificacion->usersRemitente->persona->nombre}}</a>
+                                                </div>
+                                                <span class="kt-widget__desc">
+                                                    {{$notificacion->notificacion}}
+                                                </span>
+                                            </div>
+                                            <div class="kt-widget__action">
+                                                <span class="kt-widget__date">{{$notificacion->fecha}}</span>
+                                                @if ($notificacion->estado == 0)
+                                                    <span class="kt-badge kt-badge--success kt-font-bold">1</span>
+                                                @endif
+                                            </div>
                                         </div>
-                                        <div class="kt-widget__action">
-                                            <span class="kt-widget__date">36 Mines</span>
-                                            <span class="kt-badge kt-badge--success kt-font-bold">7</span>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -61,28 +64,15 @@
                             <div class="kt-chat__head ">
                                 <div class="kt-chat__left">
 
-
                                 </div>
                                 <div class="kt-chat__center">
                                     <div class="kt-chat__label">
-                                        <a href="#" class="kt-chat__title">Jason Muller</a>
-                                        <span class="kt-chat__status">
-                                            <span class="kt-badge kt-badge--dot kt-badge--success"></span> Active
-                                        </span>
-                                    </div>
-                                    <div class="kt-chat__pic kt-hidden">
-                                        <span class="kt-media kt-media--sm kt-media--circle" data-toggle="kt-tooltip" data-placement="right" title="Jason Muller" data-original-title="Tooltip title">
-                                            <img src="assets/media/users/300_12.jpg" alt="image">
-                                        </span>
-                                        <span class="kt-media kt-media--sm kt-media--circle" data-toggle="kt-tooltip" data-placement="right" title="Nick Bold" data-original-title="Tooltip title">
-                                            <img src="assets/media/users/300_11.jpg" alt="image">
-                                        </span>
-                                        <span class="kt-media kt-media--sm kt-media--circle" data-toggle="kt-tooltip" data-placement="right" title="Milano Esco" data-original-title="Tooltip title">
-                                            <img src="assets/media/users/100_14.jpg" alt="image">
-                                        </span>
-                                        <span class="kt-media kt-media--sm kt-media--circle" data-toggle="kt-tooltip" data-placement="right" title="Teresa Fox" data-original-title="Tooltip title">
-                                            <img src="assets/media/users/100_4.jpg" alt="image">
-                                        </span>
+                                        @if ($notificacionMostrar)
+                                            <a href="#" class="kt-chat__title">{{$notificacionMostrar->usersRemitente->persona->nombre}}</a>
+                                            <span class="kt-chat__status">
+                                                Notificacion
+                                            </span>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="kt-chat__right">
@@ -93,48 +83,48 @@
                         <div class="kt-portlet__body">
                             <div class="kt-scroll kt-scroll--pull" data-mobile-height="300">
                                 <div class="kt-chat__messages">
-                                    <div class="kt-chat__message">
-                                        <div class="kt-chat__user">
-                                            <span class="kt-media kt-media--circle kt-media--sm">
-                                                <img src="assets/media/users/100_12.jpg" alt="image">
-                                            </span>
-                                            <a href="#" class="kt-chat__username">Jason Muller</span></a>
-                                            <span class="kt-chat__datetime">2 Hours</span>
-                                        </div>
-                                        <div class="kt-chat__text kt-bg-light-success">
-                                            How likely are you to recommend our company <br>to your friends and family?
-                                        </div>
-                                    </div>
-                                    <div class="kt-chat__message kt-chat__message--right">
-                                        <div class="kt-chat__user">
-                                            <span class="kt-chat__datetime">30 Seconds</span>
-                                            <a href="#" class="kt-chat__username">You</span></a>
-                                            <span class="kt-media kt-media--circle kt-media--sm">
-                                                <img src="assets/media/users/300_21.jpg" alt="image">
-                                            </span>
-                                        </div>
-                                        <div class="kt-chat__text kt-bg-light-brand">
-                                            Hey there, we’re just writing to let you know <br>that you’ve been subscribed to a repository on GitHub.
-                                        </div>
-                                    </div>
 
-
-
+                                    @if ($notificacionMostrar)
+                                        <div class="card card-custom gutter-b">
+                                            <div class="card-header">
+                                                <div class="card-title">
+                                                    <h3 class="card-label">
+                                                        {{$notificacionMostrar->notificacion}}
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                {{$notificacionMostrar->descripcion}}
+                                            </div>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                         <div class="kt-portlet__foot">
-                            <div class="kt-chat__input">
-                                <div class="kt-chat__editor">
-                                    <textarea style="height: 50px" placeholder="Type here..."></textarea>
-                                </div>
-                                <div class="kt-chat__toolbar">
+                            @if ($notificacionMostrar)
+                                <p class="text-primary font-size-h1">Enviar Mensaje:</p>
+                                <form method="POST" action="{{route('enviarMensaje')}}" enctype="multipart/form-data" class="kt-form">
+                                    @csrf
+                                    <input name="Destino"  type="hidden" value="{{$notificacionMostrar->userIdRemitente}}" >
+                                    <div class="kt-chat__input">
+                                        <div class="form-group">
+                                            <label name="Asunto">Asunto:</label>
+                                            <input name="Asunto" value="{{ old('Asunto') }}" type="text" class="form-control @error('Asunto') is-invalid @enderror" >
+                                        </div>
+                                        <div class="form-group mb-1">
+                                            <label name="Mensaje" for="exampleTextarea">Mensaje:</label>
+                                            <textarea name="Mensaje" class="form-control @error('Mensaje') is-invalid @enderror" id="exampleTextarea" rows="3">{{ old('Mensaje') }}</textarea>
+                                        </div>
+                                        <div class="kt-chat__toolbar">
 
-                                    <div class="kt_chat__actions">
-                                        <button type="button" class="btn btn-brand btn-md btn-upper btn-bold kt-chat__reply">Enviar</button>
+                                            <div class="kt_chat__actions">
+                                                <button type="submit" class="btn btn-brand btn-md btn-upper btn-bold">Enviar</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -148,7 +138,5 @@
 
     <!-- end:: Content -->
 </div>
-
-<script src="{{asset('js/chat.js')}}" type="text/javascript"></script>
 
 @endsection

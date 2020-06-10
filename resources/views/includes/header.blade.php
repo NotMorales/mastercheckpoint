@@ -75,26 +75,42 @@
                             </div>
                         </div>
                     </a>
-                    <a href="custom/apps/user/profile-3.html" class="kt-notification__item">
+                    <a href="{{ route('mensajes', ['mensaje' => 0 ]) }}" class="kt-notification__item">
                         <div class="kt-notification__item-icon">
                             <i class="flaticon2-mail kt-font-warning"></i>
                         </div>
                         <div class="kt-notification__item-details">
+                            @php
+                                $mensajesNuevos  = 0;
+                                $mensajesNuevos = App\mensaje::
+                                    where([
+                                        ['userId', Auth::user()->userId],
+                                        ['estado', 0],])
+                                    ->count();
+                            @endphp
                             <div class="kt-notification__item-title kt-font-bold">
-                                Mis mensajes <span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--pill kt-badge--rounded">2 pending</span>
+                                Mis mensajes @if ($mensajesNuevos > 0) <span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--pill kt-badge--rounded">{{$mensajesNuevos}}</span>@endif
                             </div>
                             <div class="kt-notification__item-time">
                                 Conversaciones y mensajes
                             </div>
                         </div>
                     </a>
-                    <a href="custom/apps/user/profile-2.html" class="kt-notification__item">
+                    <a href="{{ route('notificaciones', ['notificacion' => 0 ]) }}" class="kt-notification__item">
                         <div class="kt-notification__item-icon">
                             <i class="flaticon2-rocket-1 kt-font-danger"></i>
                         </div>
                         <div class="kt-notification__item-details">
+                            @php
+                                $notificacionesNuevos  = 0;
+                                $notificacionesNuevos = App\notificacion::
+                                    where([
+                                        ['userId', Auth::user()->userId],
+                                        ['estado', 0],])
+                                    ->count();
+                            @endphp
                             <div class="kt-notification__item-title kt-font-bold">
-                                Mis notificaciones <span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--pill kt-badge--rounded">2 pending</span>
+                                Mis notificaciones @if ($notificacionesNuevos > 0) <span class="kt-badge kt-badge--danger kt-badge--inline kt-badge--pill kt-badge--rounded">{{$notificacionesNuevos}}</span>@endif
                             </div>
                             <div class="kt-notification__item-time">
                                 Todas las notificaciones

@@ -134,7 +134,7 @@
                                     $notificaciones = App\notificacion::where('userId', Auth::user()->userId)->orderBy('fecha', 'desc')->get();
                                 @endphp
                                 @foreach ($notificaciones as $notifi)
-                                    <a href="#" class="kt-notification__item">
+                                    <a href="{{route('notificaciones', ['notificacion' => $notifi->notificacionId ])}}" class="kt-notification__item">
                                         <div class="kt-notification__item-icon">
                                             <i class="@if ($notifi->estado == 0)
                                                 flaticon-bell kt-font-danger
@@ -161,7 +161,7 @@
                                     $Mensajes = App\mensaje::where('userId', Auth::user()->userId)->orderBy('fecha', 'desc')->get();
                                 @endphp
                                 @foreach ($Mensajes as $msn)
-                                    <a href="#" class="kt-notification-v2__item">
+                                    <a href="{{route('verMensaje', ['mensaje' => $msn->mensajeId ])}}" class="kt-notification-v2__item">
                                         <div class="kt-notification-v2__item-icon">
                                             <i class="@if ($msn->estado == 0)
                                                 flaticon-multimedia kt-font-danger

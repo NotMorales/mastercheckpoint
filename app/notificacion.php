@@ -15,6 +15,6 @@ class notificacion extends Model
     }
     //Relacion Muchos a Uno
     public function usersRemitente(){
-        return $this->belongsTo('App\users', 'userId', 'userIdRemitente');
+        return $this->belongsTo('App\users', 'userIdRemitente', 'userId');
     }
 }

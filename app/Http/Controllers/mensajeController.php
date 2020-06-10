@@ -114,4 +114,14 @@ class mensajeController extends Controller
         ]);
         return redirect()->route('mensajes', ['mensaje' => $personaDestino->userId ]);
     }
+    public function verMensaje($mensaje)
+    {
+        $mensajeSelect = mensaje::where('mensajeId', $mensaje)->first();
+        if($mensajeSelect->userId == Auth::user()->userId ){
+            return redirect()->route('mensajes', ['mensaje' => $mensajeSelect->userIdRemitente ]);
+        }else{
+            return redirect()->route('mensajes', ['mensaje' => $mensajeSelect->userId ]);
+        }
+
+    }
 }
