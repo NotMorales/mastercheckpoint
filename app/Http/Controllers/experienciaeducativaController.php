@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\experienciaeducativa;
 use App\experienciaestudiante;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -113,5 +114,56 @@ class experienciaeducativaController extends Controller
             'experiencia'  => $experiencia,
             'estudiantes' => $estudiantes
         ]);
+    }
+    public function getImagen($filename)
+    {
+        $file = Storage::disk('experiencia')->get($filename);
+        return new Response($file, 200);
+    }
+    public function editarExperiencia($experiencia)
+    {
+        $permiso = Auth::user()->roleId;
+        if( $permiso != 2 ){ return redirect()->route('inicio' );}
+        $experiencia = experienciaeducativa::where('experienciaEducativaId', $experiencia)->first();
+        if(!$experiencia){ return redirect()->route('inicio' );}
+        if($experiencia->docenteId != Auth::user()->userId){return redirect()->route('inicio' );}
+        return view('experiencia.editarExperiencia', [
+            'experiencia'  => $experiencia
+        ]);
+    }
+    public function actualizarExperiencia(Request $request)
+    {
+        $validate = $this->validate($request, [
+            'Nombre' => 'required', 'string', 'max:255',
+            'Descripcion' => 'required', 'numeric', 'max:255',
+        ]);
+
+        $Nombre = $request->input('Nombre');
+        $Descripcion = $request->input('Descripcion');
+        $experiencia = $request->input('experiencia');
+        $Color = $request->input('Color');
+
+
+        $permiso = Auth::user()->roleId;
+        if( $permiso != 2 ){ return redirect()->route('inicio' );}
+        $experiencia = experienciaeducativa::where('experienciaEducativaId', $experiencia)->first();
+        if(!$experiencia){ return redirect()->route('inicio' );}
+        if($experiencia->docenteId != Auth::user()->userId){return redirect()->route('inicio' );}
+
+        //imagen
+        $Imagen = $request->file('profile_avatar');
+        $ImagenName = "";
+        if($Imagen){
+            $ImagenName = time().$Imagen->getClientOriginalName();
+            Storage::disk('experiencia')->put($ImagenName, File::get($Imagen));
+        }else{
+            $ImagenName = $experiencia->image;
+        }
+
+        DB::table('experienciaeducativa')
+            ->where("experienciaEducativaId", $experiencia->experienciaEducativaId)
+            ->update(['nombreExperiencia' => $Nombre, 'descripcion' => $Descripcion, 'image' => $ImagenName, 'color' => $Color]);
+
+        return redirect()->route('verExperiencia', ['experiencia' => $experiencia->experienciaEducativaId] );
     }
 }

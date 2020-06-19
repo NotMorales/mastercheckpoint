@@ -22,13 +22,12 @@
 <!-- begin:: Content -->
 <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
 
-
     <div class="row">
         <div class="col-lg-4">
-            <div class="kt-portlet kt-iconbox kt-iconbox--success kt-iconbox--animate-fast">
+            <div class="kt-portlet kt-iconbox kt-iconbox--animate-fast">
                 <div class="kt-portlet__body">
                     <div class="kt-iconbox__body">
-                        <div class="kt-iconbox__icon">
+                        <div class="kt-iconbox__icon stu">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                     <polygon points="0 0 24 0 24 24 0 24"/>
@@ -53,10 +52,10 @@
         </div>
 
         <div class="col-lg-4">
-            <div class="kt-portlet kt-iconbox kt-iconbox--warning kt-iconbox--animate-fast">
+            <div class="kt-portlet kt-iconbox kt-iconbox--animate-fast">
                 <div class="kt-portlet__body">
                     <div class="kt-iconbox__body">
-                        <div class="kt-iconbox__icon">
+                        <div class="kt-iconbox__icon stu">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                     <polygon points="0 0 24 0 24 24 0 24" />
@@ -82,10 +81,10 @@
         </div>
 
         <div class="col-lg-4">
-            <div class="kt-portlet kt-iconbox kt-iconbox--primary kt-iconbox--animate-fast">
+            <div class="kt-portlet kt-iconbox kt-iconbox--animate-fast">
                 <div class="kt-portlet__body">
                     <div class="kt-iconbox__body">
-                        <div class="kt-iconbox__icon">
+                        <div class="kt-iconbox__icon stu">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                     <rect x="0" y="0" width="24" height="24"/>
@@ -110,6 +109,21 @@
         </div>
 
     </div>
+    <div class="card" style=>
+        <img height="300rem" src="@if($experiencia->image) {{route('experiencia.avatar', ['filename' => $experiencia->image ])}} @else {{asset('assets/media/users/user.png')}} @endif" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{$experiencia->nombreExperiencia}}</h5>
+          <p class="card-text">{{$experiencia->descripcion}}</p>
+        </div>
+    </div>
 </div>
 </div>
+<style>
+    .stu svg g [fill]{
+        fill: {{$experiencia->color}} !important;
+    }
+    body {
+    background: {{$experiencia->color}};
+}
+</style>
 @endsection

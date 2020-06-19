@@ -31,6 +31,9 @@ Route::get('/miperfil/avatar/{filename}', 'usersController@getImagen')->name('us
 Route::get('/crearexperiencia', 'experienciaeducativaController@crearexperiencia')->name('crearexperiencia');
 Route::post('/crearexperiencia/registro', 'experienciaeducativaController@registrarexperiencia')->name('registrarexperiencia');
 Route::get('/ExperienciaEducativa/{experiencia}', 'experienciaeducativaController@verExperiencia')->name('verExperiencia');
+Route::get('/ExperienciaEducativa/imagen/{filename}', 'experienciaeducativaController@getImagen')->name('experiencia.avatar');
+Route::get('/ExperienciaEducativa/editar/{experiencia}', 'experienciaeducativaController@editarExperiencia')->name('editarExperiencia');
+Route::post('/ExperienciaEducativa/actualizar/experiencia', 'experienciaeducativaController@actualizarExperiencia')->name('actualizarExperiencia');
 //estudiantes
 Route::get('/ExperienciaEducativa/estudiantes/{experiencia}', 'experienciaeducativaController@misEstudiantes')->name('misEstudiantes');
 Route::get('/ExperienciaEducativa/estudiantes/agregar/{experiencia}', 'experienciaestudianteController@agregarEstudiante')->name('agregarEstudiante');
